@@ -47,20 +47,25 @@ public class PROBLEMA3 extends Thread{
                 Logger.getLogger(PROBLEMA3.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        
+        //if para que solo haga join si se ha creado un hilo nuevo
         if (nHilos > 0) {
             try {
+                //join para que no acabe el programa principal antes que los hilos
                 hilo.join();
             } catch (InterruptedException ex) {
                 Logger.getLogger(PROBLEMA3.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        System.out.println("El hijo " + nHilos + " ha terminado");
+        System.out.println("El hilo " + nHilos + " ha terminado");
     }
     public static void main(String[] args) {
       
         //inicializa el hilo al que se le pasa el numero de hilos 
         PROBLEMA3 hiloPrincipal = new PROBLEMA3(3);
         hiloPrincipal.start();
+        
+        //join para que acabe el hilo antes que el resto del main
         try {
             hiloPrincipal.join();
         } catch (InterruptedException e) {
